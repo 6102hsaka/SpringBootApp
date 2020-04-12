@@ -1,0 +1,26 @@
+@charset "ISO-8859-1";
+
+.login-card {
+	margin-top : 4rem;
+	width: 20rem;
+}
+
+.register-card {
+	margin-top : 2rem;
+	width:34rem;
+}
+
+.err-msg {
+	color:#ff0000;
+	margin-top: 1rem;
+	font-weight: bold;
+	font-size: 24px;
+}
+
+.input-field {
+	width: 13rem;
+}
+
+.current-page {
+	font-weight: bold;
+}
