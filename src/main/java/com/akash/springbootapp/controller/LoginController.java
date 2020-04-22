@@ -40,7 +40,7 @@ public class LoginController {
 	
 	@PostMapping(value = "login")
 	public String login(@ModelAttribute("student") Student student,ModelMap model) {
-		Student dummy = studentService.validate(student.getId(), student.getPass());
+		Student dummy = studentService.validateLoginCredential(student.getId(), student.getPass());
 		if(dummy!=null) {
 			student.setFname(dummy.getFname());
 			student.setLname(dummy.getLname());
@@ -58,7 +58,12 @@ public class LoginController {
 	}
 	
 	@GetMapping("register")
-	public String register() {
+	public String register(@ModelAttribute("student") Student student) {
+		student.setId("");
+		student.setFname("");
+		student.setLname("");
+		student.setAge(0);
+		student.setCity("");
 		return "RegistrationPage";
 	}
 	

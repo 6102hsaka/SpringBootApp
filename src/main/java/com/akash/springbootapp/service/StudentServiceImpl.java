@@ -14,7 +14,7 @@ public class StudentServiceImpl implements StudentService{
 	
 	
 	@Override
-	public Student validate(String id, String pass) {
+	public Student validateLoginCredential(String id, String pass) {
 		return studentDao.validate(id, pass);
 	}
 

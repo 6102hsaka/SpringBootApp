@@ -59,12 +59,12 @@
     			</div>  <br/>
     			<div class="d-inline-block form-group input-field">
     				<form:label path="pass" class="control-label">Password</form:label>
-    				<form:input path="pass" class="form-control" placeholder="Enter Password" id="pass" required="required"/>
+    				<form:password path="pass" class="form-control" placeholder="Enter Password" id="pass" required="required"/>
     				<form:errors path="pass" cssStyle="color:red;"/>
     			</div>
     			<div class="d-inline-block form-group input-field float-right">
     				<form:label path="confirmPass" class="control-label">Confirm Password</form:label>
-    				<form:input path="confirmPass" class="form-control" placeholder="Re-Enter Password" 
+    				<form:password path="confirmPass" class="form-control" placeholder="Re-Enter Password" 
     					id="confirm" onchange="validConfirmPass()" required="required"/>
     				<form:errors path="confirmPass" cssStyle="color:red;"/>
     			</div>  <br/>

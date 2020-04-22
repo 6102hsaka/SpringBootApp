@@ -10,3 +10,4 @@ function validConfirmPass(){
 		document.getElementById("err-p").innerHTML = "";
 	}
 }
+
