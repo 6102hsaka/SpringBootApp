@@ -34,6 +34,11 @@
     </nav>
    <section>
   	 Hi, ${student.fname }
+  	 <br/><br/><br/>
+  	 
+  	 <p>
+  	 <p class="text-center">Want to add Member? <a href="register">Register</a></p>
+  	 </p>
    </section>
 	
 </body>
