@@ -9,12 +9,15 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.akash.springbootapp.model.Student;
 import com.akash.springbootapp.service.StudentService;
 import com.akash.springbootapp.validate.StudentValidator;
+import com.google.gson.Gson;
 
 @Controller
 @SessionAttributes("student")
@@ -58,12 +61,13 @@ public class LoginController {
 	}
 	
 	@GetMapping("register")
-	public String register(@ModelAttribute("student") Student student) {
+	public String register(@ModelAttribute("student") Student student,ModelMap model) {
 		student.setId("");
 		student.setFname("");
 		student.setLname("");
 		student.setAge(0);
 		student.setCity("");
+		model.put("countryList", studentService.getCountries());
 		return "RegistrationPage";
 	}
 	
@@ -78,7 +82,22 @@ public class LoginController {
 			return "redirect:home";
 		}
 		model.put("RegistrationErr",true);
+		model.put("countryList", studentService.getCountries());
 		return "RegistrationPage";
+	}
+	
+	@ResponseBody
+	@GetMapping(value = "loadStatesByCountry/{id}")
+	public String loadStatesByCountry(@PathVariable("id") int id) {
+		Gson gson = new Gson();
+		return gson.toJson(studentService.getStates(id));
+	}
+
+	@ResponseBody
+	@GetMapping(value = "loadCitiesByState/{id}")
+	public String loadCitiesByState(@PathVariable("id") int id) {
+		Gson gson = new Gson();
+		return gson.toJson(studentService.getCities(id));
 	}
 	
 	@GetMapping(value = "logout")
@@ -88,5 +107,10 @@ public class LoginController {
 		httpSession.invalidate();
 		httpSession = request.getSession(false);
 		return "redirect:/login";
+	}
+	
+	@GetMapping(value = "403")
+	public String accessDenied() {
+		return "403";
 	}
 }

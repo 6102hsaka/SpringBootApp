@@ -10,7 +10,43 @@
 	<title>Register</title>
 	<link href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/custom.css" rel="stylesheet" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="/js/script.js" type="text/javascript"></script>
+    <script type="text/javascript">
+	$(document).ready(function(){
+	$('#comboboxCountry').on('change', function(){
+		var countryId = $(this).val();
+		$.ajax({
+			type: 'GET',
+			url: '${pageContext.request.contextPath }/loadStatesByCountry/' + countryId,
+			success: function(result) {
+				var result = JSON.parse(result);
+				var s = '';
+				for(var i = 0; i < result.length; i++) {
+					s += '<option value="' + result[i].id + '">' + result[i].name + '</option>';
+				}
+				$('#comboboxState').html(s);
+			}
+		});
+	});
+
+	$('#comboboxState').on('change', function(){
+		var stateId = $(this).val();
+		$.ajax({
+			type: 'GET',
+			url: '${pageContext.request.contextPath }/loadCitiesByState/' + stateId,
+			success: function(result) {
+				var result = JSON.parse(result);
+				var s = '';
+				for(var i = 0; i < result.length; i++) {
+					s += '<option value="' + result[i].id + '">' + result[i].name + '</option>';
+				}
+				$('#comboboxCity').html(s);
+			}
+		});
+	});
+});
+</script>
 </head>
 <body>
 
@@ -22,6 +58,7 @@
         </li>
       </ul>
     </nav>
+   
     <p class="text-center err-msg" id="err-p">
 		<c:if test="${RegistrationErr==true}">
 			<c:out value="Unable to Register Student" />
@@ -52,11 +89,30 @@
     				<form:input path="age" class="form-control" placeholder="Enter Age" required="required"/>
     				<form:errors path="age" cssStyle="color:red;"/>
     			</div>
-    			<div class="d-inline-block form-group input-field float-right">
-    				<form:label path="city" class="control-label">City</form:label>
-    				<form:input path="city" class="form-control" placeholder="Enter City" required="required"/>
-    				<form:errors path="city" cssStyle="color:red;"/>
+    			<div class="d-block form-group input-field float-right">
+    				<form:label path="gender" class="control-label">Gender</form:label><br/>
+    				<form:radiobutton path="gender" value="Male"/>Male
+    				<form:radiobutton path="gender" value="Female"/>Female
+    				<form:errors path="gender" cssStyle="color:red;"/>
     			</div>  <br/>
+    			 
+    			<div class="form-group input-field ">
+    				<form:label path="city" class="control-label">City</form:label>
+    				<form:select path="country" id="comboboxCountry">
+    					<form:option value="NONE">--SELECT COUNTRY--</form:option>
+    					<c:forEach items="${countryList}" var="country">
+    						<form:option value="${country.id}">${country.name}</form:option>
+    					</c:forEach>
+    				</form:select> <br/>
+    				<form:select path="state" id="comboboxState">
+    					<form:option value="NONE">--SELECT STATE--</form:option>
+    				</form:select> <br/>
+    				<form:select path="city" id="comboboxCity">
+    					<form:option value="NONE">--SELECT CITY--</form:option>
+    				</form:select> <br/>
+    				<form:errors path="city" cssStyle="color:red;"/>
+    			</div>  
+    			
     			<div class="d-inline-block form-group input-field">
     				<form:label path="pass" class="control-label">Password</form:label>
     				<form:password path="pass" class="form-control" placeholder="Enter Password" id="pass" required="required"/>

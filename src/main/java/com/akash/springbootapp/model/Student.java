@@ -5,20 +5,24 @@ public class Student {
 	private String fname;
 	private String lname;
 	private double age;
+	private String gender;
+	private String country;
+	private String state;
 	private String city;
 	private String pass;
 	private String confirmPass;
-	
+
 	public Student() {
-		
+
 	}
 
-	public Student(String id, String fname, String lname, double age, String city, String pass) {
+	public Student(String id, String fname, String lname, double age, String gender, String city, String pass) {
 		super();
 		this.id = id;
 		this.fname = fname;
 		this.lname = lname;
 		this.age = age;
+		this.gender = gender;
 		this.city = city;
 		this.pass = pass;
 	}
@@ -55,6 +59,30 @@ public class Student {
 		this.age = age;
 	}
 
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
 	public String getCity() {
 		return city;
 	}
@@ -81,8 +109,8 @@ public class Student {
 
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", fname=" + fname + ", lname=" + lname + ", age=" + age + ", city=" + city
-				+ ", pass=" + pass + "]";
+		return "Student [id=" + id + ", fname=" + fname + ", lname=" + lname + ", age=" + age + ", gender=" + gender
+				+ ", city=" + city + ", pass=" + pass + "]";
 	}
-	
+
 }

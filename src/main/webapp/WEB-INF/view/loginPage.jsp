@@ -28,12 +28,12 @@
     		<form:form method="post" action="login" modelAttribute="student"> <br>
     			<div class="form-group">
     				<form:label path="id" class="control-label">Student Id</form:label>
-    				<form:input path="id" class="form-control" placeholder="Enter Student Id" required="required"/>
+    				<form:input path="id" class="form-control" name="userid" placeholder="Enter Student Id" required="required"/>
     				<form:errors path="id"></form:errors>
     			</div>
     			<div class="form-group">
     				<form:label path="pass" class="control-label">Student Password</form:label>
-    				<form:password path="pass" class="form-control" placeholder="Enter Password" required="required"/>
+    				<form:password path="pass" class="form-control" name="password"  placeholder="Enter Password" required="required"/>
     				<form:errors path="pass"></form:errors>
     			</div>
     			<button type="reset" class="btn btn-dark ">Reset</button>
